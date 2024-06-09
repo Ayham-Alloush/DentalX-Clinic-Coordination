@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+  <link rel="stylesheet" href="css/login_signup.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+    rel="stylesheet">
+  <title>DentalX</title>
+</head>
+
+<body>
+  <main class="overflow-hidden">
+    <div class="container position-relative">
+      <div class="row pt-4">
+        <div class="col-xl-4 col-lg-5 col-md-7 col position-relative">
+          <h1 class="h1 d-md-none">
+            DentalX
+          </h1>
+          <h3 class="h3 fw-semibold fs-3">
+            Hey , welcome back ..
+          </h3>
+          <p class="text-secondary ">
+            Enter your information to login. <br>
+            Make sure that it will remain confidential .
+          </p>
+          <form action="" onsubmit="return validateForm()" class="needs-validation" novalidate>
+            <div class="mb-2 mb-md-3 ">
+              <label for="user_name" class="form-label">Username</label>
+              <input type="text" name="user_name" id="user_name" class="form-control" required>
+              <div class="invalid-feedback">
+                We're sorry, but the username you entered is invalid .
+              </div>
+            </div>
+            <div class="mb-2 mb-md-3">
+              <label for="pass" class="form-label">Password</label>
+              <input type="password" name="pass" id="pass" class="form-control" required>
+              <div class="invalid-feedback">
+                We're sorry, but the password you entered is incorrect.
+              </div>
+            </div>
+            <!--  -->
+            <p class="text-secondary mb-1">Are you ?</p>
+            <div class="form-check">
+              <input type="radio" class="form-check-input" name="title" id="doc">
+              <label for="doc" class="form-check-label">Doctor</label>
+            </div>
+            <div class="form-check">
+              <input type="radio" class="form-check-input" name="title" id="pros">
+              <label for="pros" class="form-check-label">Prosthodontist</label>
+            </div>
+            <div class="invalid-feedback" id="options">
+              Please choose at least one option .
+            </div>
+            <hr>
+            <!--  -->
+            <div class="form-check mb-2 mb-md-3">
+              <input type="checkbox" name="remember_me" id="remember" class="form-check-input ">
+              <label for="remember" class="form-check-label">Remember me</label>
+            </div>
+            <button type="submit" class="btn custom w-100 text-white border-0">Sign In</button>
+            <div class="text-center d-flex align-items-center gap-1">
+              <div class="before bg-secondary w-100"></div>
+              <span class="text-secondary">or</span>
+              <div class="after bg-secondary w-100"></div>
+            </div>
+            <a href="../signup/index.html">
+              <button type="button" class="btn custom w-100 text-white border-0 mb-2">Sign Up As A Doctor</button>
+            </a>
+            <a href="">
+              <button type="button" class="btn custom w-100 text-white border-0">Sign Up As A Prosthodontist</button>
+            </a>
+          </form>
+          <div>
+            <img src="images/lg_screen_right_tooth.png" alt="error"
+              class="tooth-right w-25 d-none d-md-block position-absolute">
+          </div>
+          <div>
+            <img src="images/lg_screen_left_tooth.png" alt="error"
+              class="tooth-left w-25 d-none d-md-block position-absolute">
+          </div>
+        </div>
+        <div class="col-xl-2 col-lg-1 d-none d-lg-block"></div>
+        <div class="col-xl-6 col-lg-6 col-md-5 text-center d-none d-md-block">
+          <h1 class="h1">
+            DentalX
+          </h1>
+          <div class="mt-md-5 mt-lg-0">
+            <img src="images/login_logo.png" alt="error" class="img-fluid">
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+    crossorigin="anonymous"></script>
+  <script src="js/main.js"></script>
+</body>
+
+</html>
