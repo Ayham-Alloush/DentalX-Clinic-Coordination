@@ -23,29 +23,30 @@
           <p class="text-dark">
             Join our community and sign up today to unlock exclusive features and benefits!
           </p>
-          <form action="" class="needs-validation" onsubmit="return validateForm()">
+          <form action="../database/doc_signup.php" class="needs-validation" onsubmit="return validateForm()">
             <div class="row">
               <div class="col-sm-12 col-md-6">
                 <div class="form-floating mb-3">
-                  <input type="text" class="form-control" id="first" placeholder="name" required>
+                  <input type="text" class="form-control" id="first" placeholder="name" name="first" required>
                   <label for="first">First Name</label>
                 </div>
               </div>
               <div class="col-sm-12 col-md-6">
                 <div class="form-floating mb-3">
-                  <input type="text" class="form-control" id="last" placeholder="name" required>
+                  <input type="text" class="form-control" id="last" placeholder="name" name="last" required>
                   <label for="last">Last Name</label>
                 </div>
               </div>
               <div class="col-sm-12 col-md-6">
                 <div class="form-floating mb-3">
-                  <input type="text" class="form-control" id="phone" pattern="09\d{8}" placeholder="phone" required>
+                  <input type="text" class="form-control" id="phone" pattern="09\d{8}" placeholder="phone" name="phone"
+                    required>
                   <label for="phone">Phone Number <small>(starts with 09)</small></label>
                 </div>
               </div>
               <div class="col-sm-12 col-md-6">
                 <div class="form-floating mb-3">
-                  <input type="text" class="form-control" id="clinic" placeholder="Clinic Name" required>
+                  <input type="text" class="form-control" id="clinic" placeholder="Clinic Name" name="clinic" required>
                   <label for="clinic">Clinic Name</label>
                 </div>
               </div>
@@ -54,7 +55,7 @@
                     if already exist we have to add the class "is-invalid" to the input so we can see the red feedback 
                 -->
                 <div class="form-floating mb-3">
-                  <input type="text" class="form-control" id="user" placeholder="User Name" required>
+                  <input type="text" class="form-control" id="user" placeholder="User Name" name="user" required>
                   <label for="user">User Name</label>
                   <div class="invalid-feedback text-start">
                     Name already in use.
@@ -64,24 +65,24 @@
               <div class="col-sm-12 col-md-6">
                 <div class="form-floating mb-3">
                   <input type="password" class="form-control" id="password" placeholder="password" pattern=".{8,}"
-                    required>
+                    name="pass" required>
                   <label for="password">Password <small>(at least 8 charecters)</small></label>
                 </div>
               </div>
               <div class="col-12">
                 <div class="form-floating mb-3">
-                  <input type="text" class="form-control" id="phone" placeholder="add" required>
+                  <input type="text" class="form-control" id="phone" placeholder="add" name="address" required>
                   <label for="add">Full Address</label>
                 </div>
               </div>
               <div class="col-12 text-start">
                 Gender :
                 <div class="form-check my-2">
-                  <input type="radio" name="gender" id="male" class="form-check-input">
+                  <input type="radio" name="gender" value="male" id="male" class="form-check-input">
                   <label for="male" class="form-check-label">Male</label>
                 </div>
                 <div class="form-check">
-                  <input type="radio" name="gender" id="female" class="form-check-input">
+                  <input type="radio" name="gender" value="female" id="female" class="form-check-input">
                   <label for="female" class="form-check-label">Female</label>
                 </div>
                 <div class="invalid-feedback" id="options">
