@@ -27,13 +27,15 @@
             <div class="row">
               <div class="col-sm-12 col-md-6">
                 <div class="form-floating mb-3">
-                  <input type="text" class="form-control" id="first" placeholder="name" name="first" required>
+                  <input type="text" class="form-control" id="first" placeholder="name" pattern="[A-Za-z]+" name="first"
+                    required>
                   <label for="first">First Name</label>
                 </div>
               </div>
               <div class="col-sm-12 col-md-6">
                 <div class="form-floating mb-3">
-                  <input type="text" class="form-control" id="last" placeholder="name" name="last" required>
+                  <input type="text" class="form-control" id="last" placeholder="name" pattern="[A-Za-z]+" name="last"
+                    required>
                   <label for="last">Last Name</label>
                 </div>
               </div>
@@ -46,7 +48,8 @@
               </div>
               <div class="col-sm-12 col-md-6">
                 <div class="form-floating mb-3">
-                  <input type="text" class="form-control" id="clinic" placeholder="Clinic Name" name="clinic" required>
+                  <input type="text" class="form-control" id="clinic" placeholder="Clinic Name" pattern="[A-Za-z]+"
+                    name="clinic" required>
                   <label for="clinic">Clinic Name</label>
                 </div>
               </div>
@@ -55,7 +58,8 @@
                     if already exist we have to add the class "is-invalid" to the input so we can see the red feedback 
                 -->
                 <div class="form-floating mb-3">
-                  <input type="text" class="form-control" id="user" placeholder="User Name" name="user" required>
+                  <input type="text" class="form-control" id="user" placeholder="User Name" pattern="[A-Za-z]+"
+                    name="user" required>
                   <label for="user">User Name</label>
                   <div class="invalid-feedback text-start">
                     Name already in use.
@@ -71,7 +75,8 @@
               </div>
               <div class="col-12">
                 <div class="form-floating mb-3">
-                  <input type="text" class="form-control" id="phone" placeholder="add" name="address" required>
+                  <input type="text" class="form-control" id="phone" placeholder="add" pattern="[A-Za-z]+"
+                    name="address" required>
                   <label for="add">Full Address</label>
                 </div>
               </div>
