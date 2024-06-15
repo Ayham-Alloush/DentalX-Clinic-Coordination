@@ -6,14 +6,14 @@
 
   mysqli_select_db($con,"mydb") ;
 
-  $firstName = $_GET['first'];
-  $lastName = $_GET['last'];
-  $phoneNumber = $_GET['phone'];
-  $clinicName = $_GET['clinic'];
-  $userName = $_GET['user'];
-  $password = $_GET['pass'];
-  $fullAddress = $_GET['address'];
-  $gender = $_GET['gender'];
+  $firstName = $_POST['first'];
+  $lastName = $_POST['last'];
+  $phoneNumber = $_POST['phone'];
+  $clinicName = $_POST['clinic'];
+  $userName = $_POST['user'];
+  $password = $_POST['pass'];
+  $fullAddress = $_POST['address'];
+  $gender = $_POST['gender'];
 
   // Hash the password
   $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
