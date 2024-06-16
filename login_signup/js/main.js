@@ -37,3 +37,18 @@ function validateForm(){
   
   return true;
 }
+
+// Get the URL parameters
+const urlParams = new URLSearchParams(window.location.search);
+
+// Check if the "x" parameter exists and its value is "1"
+if (urlParams.has('x') && urlParams.get('x') === '1') {
+  // Display an alert indicating wrong password
+  alert('Wrong password');
+}
+
+// Check if the "x" parameter exists and its value is "2"
+if (urlParams.has('x') && urlParams.get('x') === '2') {
+  // Display an alert indicating invalid user name
+  alert('Invalid user name');
+}

@@ -28,15 +28,16 @@
             exit();
         } else {
             // Passwords don't match, authentication failed
-            // maybe i have to send him to same page but with parameters in url , and then hadle the parameters using js
-            // so i can send alert to the user .
-            echo "Invalid password.";
+            // send the user to signin page again but with x=1
+            // then we use js to handle this .
+            header('location: ../login_signup/index.html?x=1') ;
         }
     } 
     else {
         // No matching username found
-        // need to use url parameters like the previous one , but different alert .
-        echo "Invalid username";
+        // send the user to signin page again but with x=1
+        // then we use js to handle this .
+        header('location: ../login_signup/index.html?x=2') ;
     }
   }
   else{
