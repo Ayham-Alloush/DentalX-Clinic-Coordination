@@ -34,7 +34,28 @@
   ); " ;
 
   if(mysqli_query( $conn , $createUsersTableQuery )){
-    echo "Users table created successfully" ;
+    echo "Users table created successfully <br>" ;
+  }
+  else{
+    echo "Error creating users table :" . mysqli_error($conn) ;
+  }
+
+    $createLabUsersTableQuery= "
+    CREATE TABLE IF NOT EXISTS lab_users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    first_name VARCHAR(255),
+    last_name VARCHAR(255),
+    phone_number VARCHAR(255),
+    lab_name VARCHAR(255),
+    user_name VARCHAR(255),
+    password VARCHAR(255),
+    full_address VARCHAR(255),
+    lab_type VARCHAR(255),
+    gender VARCHAR(255)
+  ); " ;
+
+  if(mysqli_query( $conn , $createLabUsersTableQuery )){
+    echo "lab_Users table created successfully" ;
   }
   else{
     echo "Error creating users table :" . mysqli_error($conn) ;
