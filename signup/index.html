@@ -23,7 +23,7 @@
           <p class="text-dark">
             Join our community and sign up today to unlock exclusive features and benefits!
           </p>
-          <form action="../database/doc_signup.php" method="post" class="needs-validation" novalidate onsubmit="return validateForm()">
+          <form action="../database/doc_signup.php" method="post" class="needs-validation" novalidate>
             <div class="row">
               <div class="col-sm-12 col-md-6">
                 <div class="form-floating mb-3">
@@ -76,15 +76,15 @@
               <div class="col-12 text-start">
                 Gender :
                 <div class="form-check my-2">
-                  <input type="radio" name="gender" value="male" id="male" class="form-check-input">
+                  <input type="radio" name="gender" value="male" id="male" class="form-check-input" required>
                   <label for="male" class="form-check-label">Male</label>
                 </div>
                 <div class="form-check">
-                  <input type="radio" name="gender" value="female" id="female" class="form-check-input">
+                  <input type="radio" name="gender" value="female" id="female" class="form-check-input" required>
                   <label for="female" class="form-check-label">Female</label>
-                </div>
-                <div class="invalid-feedback" id="options">
-                  Please choose at least one option .
+                  <div class="invalid-feedback" id="options">
+                    Please choose at least one option .
+                  </div>
                 </div>
               </div>
               <div class="text-center mt-4 mb-4 mb-md-0">
