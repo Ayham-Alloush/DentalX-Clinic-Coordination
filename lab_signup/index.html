@@ -27,14 +27,14 @@
             <div class="row">
               <div class="col-sm-12 col-md-6">
                 <div class="form-floating mb-3">
-                  <input type="text" class="form-control" id="first" placeholder="name" pattern="^[A-Za-z]+$"
-                    name="first" required>
+                  <input type="text" class="form-control" id="first" placeholder="name"
+                    pattern="^[A-Za-z\u0600-\u06FF]+$" name="first" required>
                   <label for="first">First Name</label>
                 </div>
               </div>
               <div class="col-sm-12 col-md-6">
                 <div class="form-floating mb-3">
-                  <input type="text" class="form-control" id="last" placeholder="name" pattern="^[A-Za-z]+$" name="last"
+                  <input type="text" class="form-control" id="last" placeholder="name" pattern="^[A-Za-z\u0600-\u06FF]+$" name="last"
                     required>
                   <label for="last">Last Name</label>
                 </div>
@@ -48,7 +48,7 @@
               </div>
               <div class="col-sm-12 col-md-6">
                 <div class="form-floating mb-3">
-                  <input type="text" class="form-control" id="lab" placeholder="Lab Name" pattern="^[A-Za-z\s]+$"
+                  <input type="text" class="form-control" id="lab" placeholder="Lab Name" pattern="^[A-Za-z\u0600-\u06FF\s]+$"
                     name="lab" required>
                   <label for="lab">Lab Name</label>
                 </div>
@@ -68,7 +68,7 @@
               </div>
               <div class="col-12">
                 <div class="form-floating mb-3">
-                  <input type="text" class="form-control" id="add" placeholder="add" pattern="^[A-Za-z\s]+$"
+                  <input type="text" class="form-control" id="add" placeholder="add"
                     name="address" required>
                   <label for="add">Full Address</label>
                 </div>
