@@ -30,14 +30,14 @@
             // Passwords don't match, authentication failed
             // send the user to signin page again but with x=1
             // then we use js to handle this .
-            header('location: ../login_signup/index.html?x=1') ;
+            header('location: ../index.html?x=1') ;
         }
     } 
     else {
         // No matching username found
         // send the user to signin page again but with x=1
         // then we use js to handle this .
-        header('location: ../login_signup/index.html?x=2') ;
+        header('location: ../index.html?x=2') ;
     }
   }
   // if Prosthodontist is signing in ($title=='Prosthodontist')
@@ -60,14 +60,14 @@
             // Passwords don't match, authentication failed
             // send the user to signin page again but with x=1
             // then we use js to handle this .
-            header('location: ../login_signup/index.html?x=1') ;
+            header('location: ../index.html?x=1') ;
         }
     } 
     else {
         // No matching username found
         // send the user to signin page again but with x=1
         // then we use js to handle this .
-        header('location: ../login_signup/index.html?x=2') ;
+        header('location: ../index.html?x=2') ;
     }
   }
 ?>
