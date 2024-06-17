@@ -34,8 +34,8 @@
               </div>
               <div class="col-sm-12 col-md-6">
                 <div class="form-floating mb-3">
-                  <input type="text" class="form-control" id="last" placeholder="name" pattern="^[A-Za-z\u0600-\u06FF]+$" name="last"
-                    required>
+                  <input type="text" class="form-control" id="last" placeholder="name"
+                    pattern="^[A-Za-z\u0600-\u06FF]+$" name="last" required>
                   <label for="last">Last Name</label>
                 </div>
               </div>
@@ -48,8 +48,8 @@
               </div>
               <div class="col-sm-12 col-md-6">
                 <div class="form-floating mb-3">
-                  <input type="text" class="form-control" id="lab" placeholder="Lab Name" pattern="^[A-Za-z\u0600-\u06FF\s]+$"
-                    name="lab" required>
+                  <input type="text" class="form-control" id="lab" placeholder="Lab Name"
+                    pattern="^[A-Za-z\u0600-\u06FF\s]+$" name="lab" required>
                   <label for="lab">Lab Name</label>
                 </div>
               </div>
@@ -67,19 +67,34 @@
                 </div>
               </div>
               <div class="col-12">
-                <div class="form-floating mb-3">
-                  <input type="text" class="form-control" id="add" placeholder="add"
-                    name="address" required>
-                  <label for="add">city</label>
+                <div class="mb-3">
+                  <select class="form-select" id="add" name="address" required>
+                    <option selected disabled hidden value="">Choose Your City</option>
+                    <option value="اللاذقية">latakia</option>
+                    <option value="حلب">Aleppo</option>
+                    <option value="درعا">Daraa</option>
+                    <option value="دير الزور">Deir ez-Zor</option>
+                    <option value="حماة">Hama</option>
+                    <option value="الحسكة">Al-Hasakah</option>
+                    <option value="حمص">Homs</option>
+                    <option value="ادلب">Idlib</option>
+                    <option value="الرقة">Ar-Raqqah</option>
+                    <option value="السويداء">As-Suwayda</option>
+                    <option value="طرطوس">Tartus</option>
+                    <option value="دمشق">Damascus</option>
+                  </select>
+                  <div class="invalid-feedback text-start" id="feedback">
+                    Please choose city .
+                  </div>
                 </div>
               </div>
               <div class="col-12">
                 <div class="mb-3">
                   <select class="form-select" id="lab_type" name="type" required>
                     <option selected disabled hidden value="">Choose The Type Of Your Lab</option>
-                    <option value="fixed">Fixed Prosthodontics</option>
-                    <option value="Removable">Removable Prosthodontics</option>
-                    <option value="Fixed_Removable">Fixed/Removable Prosthodontics</option>
+                    <option value="تعويضات ثابتة">Fixed Prosthodontics</option>
+                    <option value="تعويضات متحركة">Removable Prosthodontics</option>
+                    <option value="تعويضات ثابتة/متحركة">Fixed/Removable Prosthodontics</option>
                   </select>
                   <div class="invalid-feedback text-start" id="feedback">
                     Please choose the type of your lab .
