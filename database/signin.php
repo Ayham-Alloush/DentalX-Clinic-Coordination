@@ -1,4 +1,5 @@
 <?php
+  session_start();
   $con = mysqli_connect("localhost","root","") ;
 
   if (!$con){
@@ -23,7 +24,8 @@
 
         if (password_verify($password, $hashedPassword)) {
             // Passwords match, authentication successful
-            header('Location: ../doc_home/index.php');
+            $_SESSION['username'] = $userName ;
+            header('Location: ../doc_home/doc-home.php');
             mysqli_stmt_close($stmt);
             exit();
         } else {
