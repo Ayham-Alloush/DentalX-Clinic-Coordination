@@ -45,13 +45,13 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">
+              <a class="nav-link" href="../doc_profile/doc-profile.php">
                 <i class="fa-solid fa-user"></i>
                 الحساب الشخصي
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">
+              <a class="nav-link" href="../orders/orders.php">
                 <i class="fa-solid fa-bag-shopping"></i>
                 قائمة الطلبات
               </a>
@@ -63,7 +63,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">
+              <a class="nav-link" href="../index.html">
                 <i class="fa-solid fa-right-from-bracket"></i>
                 تسجيل الخروج
               </a>
@@ -94,13 +94,13 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="../doc_profile/doc-profile.php">
                   <i class="fa-solid fa-user"></i>
                   الحساب الشخصي
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="../orders/orders.php">
                   <i class="fa-solid fa-bag-shopping"></i>
                   قائمة الطلبات
                 </a>
@@ -111,7 +111,7 @@
                   حول
                 </a>
               <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="../index.html">
                   <i class="fa-solid fa-right-from-bracket"></i>
                   تسجيل الخروج
                 </a>
