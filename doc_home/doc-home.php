@@ -57,7 +57,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">
+              <a class="nav-link" href="../about/about.html">
                 <i class="fa-solid fa-circle-question"></i>
                 حول
               </a>
@@ -106,7 +106,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="../about/about.html">
                   <i class="fa-solid fa-circle-question"></i>
                   حول
                 </a>
