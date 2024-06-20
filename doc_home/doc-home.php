@@ -136,7 +136,7 @@
                       <span id="lab-name" class="text-secondary">'.$lab_name.'</span>
                     </p>
                     <p class="card-text fs-5">اسم المخبري :
-                      <span id="doc-name" class="text-secondary">'.$first_name.$last_name.' </span>
+                      <span id="doc-name" class="text-secondary">'.$first_name." ".$last_name.' </span>
                     </p>
                     <p class="card-text fs-5">نوع المخبر :
                       <span id="lab-type" class="text-secondary">'.$lab_type.'</span>

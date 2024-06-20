@@ -55,7 +55,8 @@
 
         if (password_verify($password, $hashedPassword)) {
             // Passwords match, authentication successful
-            header('Location: ../lab_home/index.php');
+            $_SESSION['username'] = $userName ;
+            header('Location: ../lab_profile/lab-profile.php');
             mysqli_stmt_close($stmt);
             exit();
         } else {
