@@ -1,0 +1,37 @@
+main{
+  background-image: linear-gradient(to right , #c1c5c7 , #9B91FA , #5C13FB 96.15%) ;
+  min-height: 100vh ;
+ 
+}
+
+.navbar.navbar-fixed-right {
+      position: fixed;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      width: 200px;
+      overflow-y: auto;
+      background-color: #e1ddea;
+      border-right: 1px solid #ddd; 
+}
+
+/* positioning edit button */
+.card .edit{
+  /* position: absolute ;
+  bottom: 2% ;
+  left: 2% ; */
+  background-image: linear-gradient(90deg, #67AFFD 0%, #4A4DEA 48.75%, #7A40F4 101.73%); 
+
+}
+
+@media (min-width: 576px){
+  main{
+    padding-right: 200px ;
+  }
+}
+
+@media (max-width: 575.9px){
+  main{
+     padding-top: 60px ;
+  }
+}
