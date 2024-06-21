@@ -17,11 +17,7 @@ main{
 
 /* positioning edit button */
 .card .edit{
-  /* position: absolute ;
-  bottom: 2% ;
-  left: 2% ; */
   background-image: linear-gradient(90deg, #67AFFD 0%, #4A4DEA 48.75%, #7A40F4 101.73%); 
-
 }
 
 @media (min-width: 576px){
