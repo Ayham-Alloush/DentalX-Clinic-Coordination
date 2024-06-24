@@ -15,9 +15,15 @@ main{
       border-right: 1px solid #ddd; 
 }
 
-/* positioning edit button */
-.card .edit{
+.card .edit,
+.accordion .save{
   background-image: linear-gradient(90deg, #67AFFD 0%, #4A4DEA 48.75%, #7A40F4 101.73%); 
+}
+
+/* changing the position of accordions arrow , because this website is arabic instead of english */
+.accordion-button::after{
+  position: absolute ;
+  left: 15px ;
 }
 
 @media (min-width: 576px){

@@ -7,13 +7,15 @@
 
   mysqli_select_db($con,"mydb") ;
 
-  // $query = "SELECT id FROM lab_users where user_name = ?" ;
-  // $stmt = mysqli_prepare($con, $query);
-  // mysqli_stmt_bind_param($stmt,"s",$_SESSION['username']) ;
-  // mysqli_stmt_execute($stmt) ;
-  // mysqli_stmt_bind_result($stmt, $id) ;
-  // mysqli_stmt_fetch($stmt) ;
-  // mysqli_stmt_close($stmt) ;
+  $query = "SELECT id FROM lab_users where user_name = ?" ;
+  $stmt = mysqli_prepare($con, $query);
+  mysqli_stmt_bind_param($stmt,"s",$_SESSION['username']) ;
+  mysqli_stmt_execute($stmt) ;
+  mysqli_stmt_bind_result($stmt, $id) ;
+  mysqli_stmt_fetch($stmt) ;
+  mysqli_stmt_close($stmt) ;
+  // we will use this later
+  $_SESSION['id'] = $id ;
 
   $query = "SELECT lab_name, first_name, last_name, lab_type, full_address, phone_number FROM lab_users where user_name = ?" ;
   $stmt = mysqli_prepare($con, $query) ;
@@ -21,6 +23,19 @@
   mysqli_stmt_execute($stmt) ;
   mysqli_stmt_bind_result($stmt, $lab_name, $first_name, $last_name, $lab_type, $full_address, $phone_number) ;
   mysqli_stmt_fetch($stmt) ;
+  mysqli_stmt_close($stmt) ;
+  // we will use this later
+  $_SESSION['lab_type'] = $lab_type ;
+
+  // selecting columns names to generate inputs depending on the columns names .
+  $tableName = "prices";
+  $query = "SELECT column_name FROM information_schema.columns WHERE table_name = ? ";
+  $stmt = mysqli_prepare($con, $query);
+  mysqli_stmt_bind_param($stmt, "s", $tableName) ;
+  mysqli_stmt_execute($stmt);
+  mysqli_stmt_store_result($stmt);
+  mysqli_stmt_bind_result($stmt, $columnName);
+  // we will fetch ($stmt) inside html section .
 ?>
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
@@ -120,6 +135,7 @@
     </nav>
 
     <div class="container-fluid pt-3 pe-5 ps-5 ">
+      <!-- info section -->
       <div class="card fs-5">
         <div class="card-body">
           <p class="card-text">الاسم :
@@ -150,11 +166,116 @@
         </div>
         <div class="card-footer text-center">
           <a href="../lab_profile_edit/lab-profile-edit.php">
-            <button class="btn btn-secondary edit w-50">تعديل المعلومات</button>
+            <button class="btn btn-secondary edit w-50 border-0">تعديل المعلومات</button>
           </a>
         </div>
       </div>
+      <!-- info section -->
+      <hr>
+      <!-- prices section -->
+      <div class="accordion">
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
+              قائمة المواد
+            </button>
+          </h2>
+          <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+              <div class="container-fluid">
+                <form action="" method="post">
+                  <div class="row row-cols-1 row-cols-xl-2">
+                    <?php
+                      $i = -2 ;
+                      $k = 0 ;
+                      if($lab_type=="تعويضات ثابتة"){   
+                        while (mysqli_stmt_fetch($stmt)) {
+                          // we use $i so we ignore the first two column in the table (id,lab_id,user_name)
+                          // first 14 columns are for fixed prosthodontists (ignoring id,lab_id,user_name)
+                          if($i >= 1 && $i <= 14){
+                            // increasing k which is the input number , it will start at 1 , 
+                            // so the first input will have the (id and name) => input1 , and second will have input2 .. etc..
+                            $k++ ;
+                            echo '
+                            <div class="col">
+                              <label for="input'.$k.'" class="mb-1 text-secondary d-md-none">'.$columnName.'</label>
+                              <div class="input-group mb-3" dir="ltr">
+                                <span class="input-group-text">ل.س</span>
+                                <input type="number" class="form-control" dir="rtl" min="0" id="input'.$k.'" name="input'.$k.'">
+                                <span class="input-group-text d-none d-md-inline-block">'.$columnName.'</span>
+                              </div>
+                            </div>' ;
+                          }
+                          $i++ ;
+                          if($i==16){
+                            break ;
+                          }
+                        }
+                      }
+
+                      elseif($lab_type=="تعويضات متحركة"){   
+                        while (mysqli_stmt_fetch($stmt)) {
+                          // we use $i so we ignore the first two column in the table (id,lab_id,user_name)
+                          // columns from 15 to 49 are for removable prosthodontists (ignoring id,lab_id,user_name)
+                          if($i >= 15 && $i <= 49){
+                            // increasing k which is the input number , it will start at 1 , 
+                            // so the first input will have the (id and name) => input1 , and second will have input2 .. etc..
+                            $k++ ;
+                            echo '
+                            <div class="col">
+                              <label for="input'.$k.'" class="mb-1 text-secondary d-md-none">'.$columnName.'</label>
+                              <div class="input-group mb-3" dir="ltr">
+                                <span class="input-group-text">ل.س</span>
+                                <input type="number" class="form-control" dir="rtl" min="0" id="input'.$k.'" name="input'.$k.'">
+                                <span class="input-group-text d-none d-md-inline-block">'.$columnName.'</span>
+                              </div>
+                            </div>' ;
+                          }
+                          $i++ ;
+                          if($i==50){
+                            break ;
+                          }
+                        }
+                      }
+
+                      else{   
+                        while (mysqli_stmt_fetch($stmt)) {
+                          // we use $i so we ignore the first two column in the table (id,lab_id,user_name)
+                          // columns from 1 to 49 are for fixed/removable prosthodontists (ignoring id,lab_id,user_name)
+                          if($i >= 1 && $i <= 49){
+                            // increasing k which is the input number , it will start at 1 , 
+                            // so the first input will have the (id and name) => input1 , and second will have input2 .. etc..
+                            $k++ ;
+                            echo '
+                            <div class="col">
+                              <label for="input'.$k.'" class="mb-1 text-secondary d-md-none">'.$columnName.'</label>
+                              <div class="input-group mb-3" dir="ltr">
+                                <span class="input-group-text">ل.س</span>
+                                <input type="number" class="form-control" dir="rtl" min="0" id="input'.$k.'" name="input'.$k.'">
+                                <span class="input-group-text d-none d-md-inline-block">'.$columnName.'</span>
+                              </div>
+                            </div>' ;
+                          }
+                          $i++ ;
+                          if($i==50){
+                            break ;
+                          }
+                        }
+                      }
+                    ?>
+                  </div>
+                  <div class="w-100 text-center">
+                    <button class="btn w-50 border-0 save text-light">حفظ</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div> 
+      </div>
+
     </div>
+    <!-- end of the main container -->
   </main>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
@@ -162,3 +283,27 @@
 </body>
 
 </html>
+
+
+<!-- we have to put on all input .. 
+
+ two variables , which will be oposite from each others .. or empty 
+ so 
+ if lab-type is fixed => state-x = disabled , state-y = empty 
+ and if lab-type is removable => state-x = empty , state-y = disabled
+ else state-x=state-y=empty
+
+ and we will put state x or y on all inputs , lets make them $fixed and $removable insted of x , y
+ on all inputs for fixed .. we will put fixed , so if it's fixed it will be empty and $removable will be disabled
+
+<div class="col <?php
+//  echo $removable ?>">
+                          <label for="" class="mb-1 text-secondary d-md-none">تجربة المعدن</label>
+                          <div class="input-group mb-3" dir="ltr">
+                            <span class="input-group-text">ل.س</span>
+                            <input type="number" class="form-control" dir="rtl" min="0" >
+                            <span class="input-group-text d-none d-md-inline-block">تجربة المعدن</span>
+                          </div>
+                        </div> 
+
+-->
