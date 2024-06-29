@@ -65,7 +65,7 @@
                 <div class="form-floating mb-3">
                   <input type="text" class="form-control pe-4" id="lab" placeholder="Lab Name"
                     pattern="^[A-Za-z\u0600-\u06FF\s]+$" name="lab" required
-                    value="<?php echo ' '.$lab_name; ?>">
+                    value="<?php echo $lab_name; ?>">
                   <label for="lab">اسم المخبر :</label>
                 </div>
               </div>
