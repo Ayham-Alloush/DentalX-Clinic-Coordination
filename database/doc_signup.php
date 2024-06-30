@@ -29,9 +29,8 @@
 
   // Execute the prepared statement
   if (mysqli_stmt_execute($stmt)) {
-      echo "Your account is added.";
-      // need to add the home page for doctor here in the future 
-      // header("Location: index.html");
+      // sending user to sign in page 
+      header("Location: ../index.html");
   } else {
       echo "Error: " . mysqli_stmt_error($stmt);
   }
