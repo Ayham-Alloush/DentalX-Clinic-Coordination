@@ -36,6 +36,17 @@
   mysqli_stmt_store_result($stmt);
   mysqli_stmt_bind_result($stmt, $columnName);
   // we will fetch ($stmt) inside html section .
+
+  $query = "SELECT * FROM prices where user_name = ?" ;
+  $stmt_2 = mysqli_prepare($con, $query) ;
+  mysqli_stmt_bind_param($stmt_2, "s", $_SESSION['username']) ;
+  mysqli_stmt_execute($stmt_2) ;
+  mysqli_stmt_bind_result($stmt_2, $price_row_id, $lab_id, $user_name, $price1, $price2, $price3, $price4, $price5, $price6,
+  $price7, $price8, $price9, $price10, $price11, $price12, $price13, $price14, $price15, $price16, $price17, $price18, 
+  $price19, $price20, $price21, $price22, $price23, $price24, $price25, $price26, $price27, $price28, 
+  $price29, $price30, $price31, $price32, $price33, $price34, $price35, $price36, $price37, $price38, $price39, 
+  $price40, $price41, $price42, $price43, $price44, $price45, $price46, $price47, $price48, $price49) ;
+  mysqli_stmt_fetch($stmt_2) ;
 ?>
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
@@ -183,83 +194,88 @@
           <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
             <div class="accordion-body">
               <div class="container-fluid">
-                <form action="" method="post">
+                <form action="../database/price-edit.php" method="post">
                   <div class="row row-cols-1 row-cols-xl-2">
                     <?php
                       $i = -2 ;
-                      $k = 0 ;
                       if($lab_type=="تعويضات ثابتة"){   
                         while (mysqli_stmt_fetch($stmt)) {
-                          // we use $i so we ignore the first two column in the table (id,lab_id,user_name)
+                          // we use $i so we ignore the first three columns in the table (id,lab_id,user_name)
                           // first 14 columns are for fixed prosthodontists (ignoring id,lab_id,user_name)
                           if($i >= 1 && $i <= 14){
-                            // increasing k which is the input number , it will start at 1 , 
-                            // so the first input will have the (id and name) => input1 , and second will have input2 .. etc..
-                            $k++ ;
+                            // previously we used stmt_bind_result with price1,price2,price3 .. etc 
+                            // now for each input we will generate its value depending on $i .
+                            $value = "price".$i;
                             echo '
                             <div class="col">
-                              <label for="input'.$k.'" class="mb-1 text-secondary d-md-none">'.$columnName.'</label>
+                              <label for="input'.$i.'" class="mb-1 text-secondary d-md-none">'.$columnName.'</label>
                               <div class="input-group mb-3" dir="ltr">
                                 <span class="input-group-text">ل.س</span>
-                                <input type="number" class="form-control" dir="rtl" min="0" id="input'.$k.'" name="input'.$k.'">
+                                <input type="number" class="form-control" dir="rtl" lang="en" min="0" id="input'.$i.'" name="input'.$i.'" value="'.$$value.'" required>
                                 <span class="input-group-text d-none d-md-inline-block">'.$columnName.'</span>
-                              </div>
+                              </div> 
                             </div>' ;
                           }
+
                           $i++ ;
                           if($i==16){
                             break ;
                           }
+
                         }
                       }
 
                       elseif($lab_type=="تعويضات متحركة"){   
                         while (mysqli_stmt_fetch($stmt)) {
-                          // we use $i so we ignore the first two column in the table (id,lab_id,user_name)
+                          // we use $i so we ignore the first three columns in the table (id,lab_id,user_name)
                           // columns from 15 to 49 are for removable prosthodontists (ignoring id,lab_id,user_name)
                           if($i >= 15 && $i <= 49){
-                            // increasing k which is the input number , it will start at 1 , 
-                            // so the first input will have the (id and name) => input1 , and second will have input2 .. etc..
-                            $k++ ;
+                            // previously we used stmt_bind_result with price1,price2,price3 .. etc 
+                            // now for each input we will generate its value depending on $i .
+                            $value = "price".$i ;
                             echo '
                             <div class="col">
-                              <label for="input'.$k.'" class="mb-1 text-secondary d-md-none">'.$columnName.'</label>
+                              <label for="input'.$i.'" class="mb-1 text-secondary d-md-none">'.$columnName.'</label>
                               <div class="input-group mb-3" dir="ltr">
                                 <span class="input-group-text">ل.س</span>
-                                <input type="number" class="form-control" dir="rtl" min="0" id="input'.$k.'" name="input'.$k.'">
+                                <input type="number" class="form-control" dir="rtl" lang="en" min="0" id="input'.$i.'" name="input'.$i.'" value="'.$$value.'" required>
                                 <span class="input-group-text d-none d-md-inline-block">'.$columnName.'</span>
                               </div>
                             </div>' ;
                           }
+
                           $i++ ;
                           if($i==50){
                             break ;
                           }
+
                         }
                       }
 
                       else{   
                         while (mysqli_stmt_fetch($stmt)) {
-                          // we use $i so we ignore the first two column in the table (id,lab_id,user_name)
+                          // we use $i so we ignore the first three columns in the table (id,lab_id,user_name)
                           // columns from 1 to 49 are for fixed/removable prosthodontists (ignoring id,lab_id,user_name)
                           if($i >= 1 && $i <= 49){
-                            // increasing k which is the input number , it will start at 1 , 
-                            // so the first input will have the (id and name) => input1 , and second will have input2 .. etc..
-                            $k++ ;
+                            // previously we used stmt_bind_result with price1,price2,price3 .. etc 
+                            // now for each input we will generate its value depending on $i .
+                            $value = "price".$i ;
                             echo '
                             <div class="col">
-                              <label for="input'.$k.'" class="mb-1 text-secondary d-md-none">'.$columnName.'</label>
+                              <label for="input'.$i.'" class="mb-1 text-secondary d-md-none">'.$columnName.'</label>
                               <div class="input-group mb-3" dir="ltr">
                                 <span class="input-group-text">ل.س</span>
-                                <input type="number" class="form-control" dir="rtl" min="0" id="input'.$k.'" name="input'.$k.'">
+                                <input type="number" class="form-control" dir="rtl" lang="en" min="0" id="input'.$i.'" name="input'.$i.'" value="'.$$value.'" required>
                                 <span class="input-group-text d-none d-md-inline-block">'.$columnName.'</span>
                               </div>
                             </div>' ;
                           }
+
                           $i++ ;
                           if($i==50){
                             break ;
                           }
+
                         }
                       }
                     ?>
@@ -283,27 +299,3 @@
 </body>
 
 </html>
-
-
-<!-- we have to put on all input .. 
-
- two variables , which will be oposite from each others .. or empty 
- so 
- if lab-type is fixed => state-x = disabled , state-y = empty 
- and if lab-type is removable => state-x = empty , state-y = disabled
- else state-x=state-y=empty
-
- and we will put state x or y on all inputs , lets make them $fixed and $removable insted of x , y
- on all inputs for fixed .. we will put fixed , so if it's fixed it will be empty and $removable will be disabled
-
-<div class="col <?php
-//  echo $removable ?>">
-                          <label for="" class="mb-1 text-secondary d-md-none">تجربة المعدن</label>
-                          <div class="input-group mb-3" dir="ltr">
-                            <span class="input-group-text">ل.س</span>
-                            <input type="number" class="form-control" dir="rtl" min="0" >
-                            <span class="input-group-text d-none d-md-inline-block">تجربة المعدن</span>
-                          </div>
-                        </div> 
-
--->
