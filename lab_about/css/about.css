@@ -1,0 +1,59 @@
+main{
+  background-color: #200c4b ;
+  min-height: 100vh ;
+}
+
+.navbar.navbar-fixed-right {
+  position: fixed;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 200px;
+  overflow-y: auto;
+  background-color: #e1ddea;
+  border-right: 1px solid #ddd; 
+}
+
+.cover{
+  height: 100vh ;
+  position: relative ;
+}
+
+.cover .intro{
+  position: relative ;
+}
+
+.round{
+  opacity: 0.7 ;
+}
+
+.bg-img{
+  background-color: red ;
+  background-image: url(../images/ozkan-guner-8YUH8Jne5S0-unsplash.jpg) ;
+  background-size: cover ;
+  background-position: center ;
+  filter:brightness(50%) ;
+  height: 100vh ;
+  width: 100% ;
+  position: absolute ;
+}
+
+section{
+  min-height: 100vh ;
+  background-image: url(../images/sunny-smiles-dental-fillings.jpeg);
+  background-size: cover ;
+  background-position: bottom ;
+}
+
+@media (min-width: 576px){
+  main{
+    padding-right: 200px ;
+  }
+}
+
+@media (max-width: 575.9px){
+  main{
+     padding-top: 56px ;
+  }
+}
+
