@@ -76,7 +76,7 @@
     echo "Error creating order_details table :" . mysqli_error($conn) ;
   }
 
-  // // creating table for orders
+  // creating table for orders
   $createOrdersTableQuery= "
   CREATE TABLE IF NOT EXISTS orders (
   id INT PRIMARY KEY AUTO_INCREMENT,
@@ -169,6 +169,24 @@
   }
   else{
     echo "Error creating Prices table :" . mysqli_error($conn) ;
+  }
+
+  // creating table for gallery
+  $createImagesTableQuery= "
+    CREATE TABLE IF NOT EXISTS images (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    lab_id INT,
+    user_name VARCHAR(255),
+    filename VARCHAR(255),
+    filedata LONGBLOB,
+    FOREIGN KEY (lab_id) REFERENCES lab_users(id)
+    ); " ;
+
+  if(mysqli_query( $conn , $createImagesTableQuery )){
+    echo "images table created successfully <br>" ;
+  }
+  else{
+    echo "Error creating images table :" . mysqli_error($conn) ;
   }
 
 
