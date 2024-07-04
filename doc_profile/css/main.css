@@ -1,0 +1,41 @@
+main {
+    font-family: 'Inter', sans-serif ;
+    background-image: linear-gradient(to left, #c1c5c7, #9B91FA, #5C13FB 96.15%);
+    min-height: 100vh;
+    position: relative;
+}
+
+.navbar.navbar-fixed-right {
+    position: fixed;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 200px;
+    overflow-y: auto;
+    background-color: #e1ddea;
+    border-right: 1px solid #ddd;
+}
+
+/* every thing under this comment is to edit the label so it will be on the right 
+   instead of the left , and to make its background transparent */
+.form-floating label::after{
+  background-color: transparent !important ;
+}
+
+label{
+  position: absolute ;
+  right: 0 !important ;
+  left: auto !important ;
+}
+
+@media (min-width: 576px) {
+    main {
+        padding-right: 200px;
+    }
+}
+
+@media (max-width: 575.9px) {
+    main {
+        padding-top: 60px;
+    }
+}
