@@ -26,6 +26,52 @@ main{
   left: 15px ;
 }
 
+/* add btn in gallery */
+.add-btn{
+  display: flex ;
+  background-image: linear-gradient(to right , #c1c5c7 , #9B91FA , #5C13FB 96.15%) ;;
+  height: 100px ;
+  align-items: center ;
+  justify-content: center ;
+  position: relative ;
+}
+/* plus sign */
+.add-btn i{
+  font-size: 40px ;
+  color: rgb(224, 222, 218) ;
+  transition: transform 0.3s ease-out ;
+}
+
+.add-btn:hover i{
+  transform: scale(1.3) ;
+}
+
+.add-btn form{
+  position: absolute ;
+  width: 100% ;
+  height: 100% ;
+}
+
+input[type="file"]{
+  width: 100% ;
+  height: 100% ;
+  cursor: pointer ;
+}
+
+input[type="file"]::file-selector-button{
+  width: 100% ;
+  height: 100% ;
+  visibility: hidden ;
+}
+
+.delete-btn{
+  background-color: transparent ;
+  position: absolute ;
+  top: 15px ;
+  right: 15px ;
+  border: none ;
+}
+
 @media (min-width: 576px){
   main{
     padding-right: 200px ;

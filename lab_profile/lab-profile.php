@@ -47,6 +47,83 @@
   $price29, $price30, $price31, $price32, $price33, $price34, $price35, $price36, $price37, $price38, $price39, 
   $price40, $price41, $price42, $price43, $price44, $price45, $price46, $price47, $price48, $price49) ;
   mysqli_stmt_fetch($stmt_2) ;
+  mysqli_stmt_close($stmt_2) ;
+
+  $query = "SELECT id, filename, filedata FROM images WHERE lab_id = ?" ;
+  $stmt_2 = mysqli_prepare($con, $query) ;
+  mysqli_stmt_bind_param($stmt_2, "i", $_SESSION['id']) ;
+  mysqli_stmt_execute($stmt_2) ;
+  mysqli_stmt_store_result($stmt_2) ;
+  mysqli_stmt_bind_result($stmt_2, $image_id, $fileName, $fileData) ;
+  
+  // we have two arrays , they will contain [img_name, img_data] , so it's array of arrays , 
+  // first array will have the images which should be in the first column , and second array will 
+  // have images which will be in second col , we will add to those arrays images , 
+  // trying to keep the two columns in same height , and not too much different between their heights .
+  $firstColumn = [] ;
+  $secondColumn = [] ;
+
+  // $colHeight array is for columns height , when we add image to a column we will increase its height
+  // in the array , so colHeight[0] represent the height for first column , and colHeight[1] for second column ,
+  $colHeight = array(0,0) ;
+  
+  while (mysqli_stmt_fetch($stmt_2)){
+    // getting WxH for the image 
+    $imgSize = getimagesizefromstring($fileData) ;
+    $imgWidth = $imgSize[0] ;
+    $imgHeight = $imgSize[1] ;
+    // calculating aspect ratio for image
+    $aspectR = $imgWidth / $imgHeight ;
+    // the height stored in images table is the orginal height , so when we select the image and
+    // try to echo it inside col , it will have img-fluid .. so the width will be set to 100% ..
+    // so the height will change from original to keep the aspect ratio , maybe it will be less or more than original ..
+    // so we will assume that the new widht is 200px for all images , and we can get the new 
+    // height for all images if the width is 200px =>>> ( new-width/new-height = aspect-ratio = old-width/old-height ) 
+    // new width is 200 so (200/new-h = aspect-ratio) => (new-h = 200/aspect-ratio) .. 
+    // the idea of puting width 200 is to set same width on all images , we don't care about the width here 
+    // because eventually we are sending the orginal WxH to html , but we did put width 200px here to see 
+    // the real difference after changing aspect ratio to a new one (where width is same in all images) , cause in html we are changing 
+    // aspect ratio cause we put images in col , and this will change the original width and height ,
+    // example : let's assume that we didn't do this , stored WxH for img1 is 10x30 , img2 is 20x40 , 
+    // if we do colHeihgt[0] = 30 (img1->height) , and colHeight[1] = 40 (img2->height) , the algorithm will add into col[0] cause it has less height
+    // but if the col in html has width = 25 , so height for img1 will change to 75 insted of 30 , and im2 will change to 50 insted of 40 ,
+    // we will add to column[0] (30) and not [1] (40) .. while we should add to column[1] cause in real
+    // it has less height (50<75) , but we are adding to column[0] cause we have in colHeight
+    // the original heights which we will be comparing , this is wrong , so we need to see if we use same width
+    // on img1 and img2 , what is the new height , and now we can compare and add in the column with less height .
+    $newHeight = 200/$aspectR ;
+    // when selecting img from table , we have to encode it 
+    $imageData = base64_encode($fileData);
+    // this is the src for img 
+    $imageSrc = 'data:image/jpeg;base64,' . $imageData;
+    // getting the index of column with less height , 0 is for first col , 1 for second col .
+    $min = getMin($colHeight) ;
+    if($min==0){
+      // because getMin function returned 0 .. it means that the first column has less height ,
+      // so we will add the image to the first col , 
+      // so we have to increas its height in $colHeight[0] , and we have to add
+      // the image info to $firstColumn so we can output them later in html section .
+      $colHeight[0] += $newHeight ;
+      // $colHeight[0] += $imgHeight ;
+      $firstColumn[] = [$fileName, $imageSrc, $image_id] ;
+    }
+    elseif($min==1){
+      $colHeight[1] += $newHeight ;
+      // $colHeight[1] += $imgHeight ;
+      $secondColumn[] = [$fileName, $imageSrc, $image_id] ;
+    }
+  }
+
+  function getMin($colHeight){
+    $min_value = min($colHeight);
+    $min_index = array_search($min_value, $colHeight);
+    if($min_index==0){
+      return 0 ;
+    }
+    else{
+      return 1 ;
+    }
+  }
 ?>
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
@@ -184,7 +261,7 @@
       <!-- info section -->
       <hr>
       <!-- prices section -->
-      <div class="accordion">
+      <div class="accordion" id="accordionExample">
         <div class="accordion-item">
           <h2 class="accordion-header">
             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
@@ -289,13 +366,74 @@
           </div>
         </div> 
       </div>
+      <!-- prices section -->
 
+      <!-- gallery section -->
+      <div class="accordion mt-3" id="accordionTwo">
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo">
+              معرض الأعمال
+            </button>
+          </h2>
+          <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionTwo">
+            <div class="accordion-body">
+              <div class="container-fluid overflow-hidden">   
+                <!-- this div for adding -->
+                <div class="add-btn rounded border border-3 border-secondary my-2">
+                  <i class="fa-regular fa-square-plus"></i>
+                  <form action="../database/add-image.php" method="post" id="myForm" enctype="multipart/form-data">
+                    <!-- because it's multiple we used [] in name -->
+                    <input type="file" name="img[]" id="fileInput" multiple required>
+                    <!-- we are submiting on change .. using js -->
+                  </form>
+                </div>
+                <div class="row row-cols-1 row-cols-lg-2 gx-3"> 
+                  <!-- first column -->
+                  <div class="col">
+                    <?php 
+                      for($i=0 ; $i < count($firstColumn) ; $i++){
+                        $imgInfo = $firstColumn[$i] ;
+                        echo '
+                          <form action="../database/deleting-img.php" method="post" class="position-relative mb-3" >
+                            <img src="'.$imgInfo[1].'" class="w-100 rounded border border-3 border-secondary" alt="'.$imgInfo[0].'" style="height: auto;" >
+                            <input type="text" name="img_id" value="'.$imgInfo[2].'" style="display: none ;" >
+                            <button type="submit" class="delete-btn fs-3 text-white"> <i class="fa-solid fa-trash-can"></i> </button>
+                          </form>
+                        ' ;
+                      } 
+                    ?>
+                  </div>
+                  <!-- second column -->
+                  <div class="col">
+                    <?php 
+                      for($i=0 ; $i < count($secondColumn) ; $i++){
+                        $imgInfo = $secondColumn[$i] ;
+                        echo '
+                          <form action="../database/deleting-img.php" method="post" class="position-relative mb-3" >
+                            <img src="'.$imgInfo[1].'" class="w-100 rounded border border-3 border-secondary" alt="'.$imgInfo[0].'" style="height: auto;" >
+                            <input type="text" name="img_id" value="'.$imgInfo[2].'" style="display: none ;" >
+                            <button type="submit" class="delete-btn fs-3 text-white"> <i class="fa-solid fa-trash-can"></i> </button>
+                          </form>
+                        ' ;
+                      }
+                    ?>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div> 
+      </div>
+      <!-- gallery section -->
     </div>
-    <!-- end of the main container -->
+    <!--end of container  -->
   </main>
+  <!-- end of the main container -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
     crossorigin="anonymous"></script>
+  <script src="js/main.js"></script>
 </body>
 
 </html>
