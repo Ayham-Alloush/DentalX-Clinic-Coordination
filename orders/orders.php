@@ -75,10 +75,12 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="../index.html">
-                                <i class="fa-solid fa-right-from-bracket"></i>
-                                تسجيل الخروج
-                            </a>
+                            <form action="../database/logout.php" method="post" class="nav-link">
+                                <button type="submit" class="btn nav-link p-0">
+                                    <i class="fa-solid fa-right-from-bracket"></i>  
+                                    تسجيل الخروج
+                                </button>
+                            </form>
                         </li>
                     </ul>
                 </div>
@@ -124,10 +126,12 @@
                                     حول
                                 </a>
                             <li class="nav-item">
-                                <a class="nav-link" href="../index.html">
-                                    <i class="fa-solid fa-right-from-bracket"></i>
-                                    تسجيل الخروج
-                                </a>
+                                <form action="../database/logout.php" method="post" class="nav-link">
+                                    <button type="submit" class="btn nav-link p-0">
+                                        <i class="fa-solid fa-right-from-bracket"></i>  
+                                        تسجيل الخروج
+                                    </button>
+                                </form>
                             </li>
                         </ul>
                     </div>
