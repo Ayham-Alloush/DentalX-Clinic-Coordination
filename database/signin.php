@@ -25,6 +25,7 @@
         if (password_verify($password, $hashedPassword)) {
             // Passwords match, authentication successful
             $_SESSION['username'] = $userName ;
+            $_SESSION['userType'] = "doctor" ;
             header('Location: ../doc_home/doc-home.php');
             mysqli_stmt_close($stmt);
             exit();
@@ -56,6 +57,7 @@
         if (password_verify($password, $hashedPassword)) {
             // Passwords match, authentication successful
             $_SESSION['username'] = $userName ;
+            $_SESSION['userType'] = "lab" ;
             header('Location: ../lab_profile/lab-profile.php');
             mysqli_stmt_close($stmt);
             exit();

@@ -1,3 +1,12 @@
+<?php 
+  session_start() ; 
+  
+  // A user is considered logged in if the $_SESSION['username'] variable is set.
+  if (!isset($_SESSION['username']) || $_SESSION['userType'] != "doctor"){
+    // User is not logged in or not a doctor, redirect to login
+    header("Location: ../index.html") ;
+  }
+?>
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 

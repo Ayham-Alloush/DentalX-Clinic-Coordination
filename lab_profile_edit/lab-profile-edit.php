@@ -1,5 +1,12 @@
 <?php
   session_start() ;
+
+  // A user is considered logged in if the $_SESSION['username'] variable is set.
+  if (!isset($_SESSION['username']) || $_SESSION['userType'] != "lab"){
+    // User is not logged in or not a lab user, redirect to login
+    header("Location: ../index.html") ;
+  }
+  
   $con = mysqli_connect("localhost","root","") ;
   if (!$con){
     die ("connection error : ". mysqli_connect_error()) ;

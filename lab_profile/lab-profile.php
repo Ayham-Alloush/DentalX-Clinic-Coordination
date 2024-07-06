@@ -1,5 +1,12 @@
 <?php 
   session_start() ; 
+  
+  // A user is considered logged in if the $_SESSION['username'] variable is set.
+  if (!isset($_SESSION['username']) || $_SESSION['userType'] != "lab"){
+    // User is not logged in or not a lab user, redirect to login
+    header("Location: ../index.html") ;
+  }
+
   $con = mysqli_connect("localhost","root","") ;
   if (!$con){
     die ("connection error : ". mysqli_connect_error()) ;
@@ -163,7 +170,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="../lab_about/lab-about.html">
+              <a class="nav-link" href="../lab_about/lab-about.php">
                 <i class="fa-solid fa-circle-question"></i>
                 حول
               </a>
@@ -208,7 +215,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="../lab_about/lab-about.html">
+                <a class="nav-link" href="../lab_about/lab-about.php">
                   <i class="fa-solid fa-circle-question"></i>
                   حول
                 </a>
