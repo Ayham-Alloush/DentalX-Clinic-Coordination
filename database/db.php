@@ -62,11 +62,11 @@
     echo "Error creating users table :" . mysqli_error($conn) ;
   }
 
-  // this is table for testing , it will be deleted or altered to json maybe.
+  
   $createOrderDetailsTableQuery= "
   CREATE TABLE IF NOT EXISTS order_details (
   id INT PRIMARY KEY AUTO_INCREMENT,
-  order_details VARCHAR(255)
+  order_details JSON
   ); " ;
 
   if(mysqli_query( $conn , $createOrderDetailsTableQuery )){
@@ -82,6 +82,8 @@
   id INT PRIMARY KEY AUTO_INCREMENT,
   doc_id INT,
   lab_id INT,
+  lab_username VARCHAR(255),
+  doc_username VARCHAR(255),
   clinic_name VARCHAR(255),
   lab_name VARCHAR(255),
   doc_name VARCHAR(255),
