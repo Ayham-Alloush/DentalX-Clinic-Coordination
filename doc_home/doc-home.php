@@ -17,7 +17,7 @@
   $stmt = mysqli_prepare($con, $query) ;
   mysqli_stmt_execute($stmt) ;
   mysqli_stmt_store_result($stmt);
-  mysqli_stmt_bind_result($stmt, $user_name, $lab_name, $first_name, $last_name, $lab_type, $full_address) ;
+  mysqli_stmt_bind_result($stmt, $lab_user_name, $lab_name, $first_name, $last_name, $lab_type, $full_address) ;
   // we will fetch ($stmt) inside html section .
 ?>
 <!DOCTYPE html>
@@ -155,7 +155,7 @@
                     <p class="card-text fs-5">الموقع :
                       <span id="location" class="text-secondary">'.$full_address.'</span>
                     </p>
-                    <a href="../lab_details/lab-details.php?user_name='.$user_name.'" class="btn btn-primary mb-1 w-100">عرض التفاصيل</a>
+                    <a href="../lab_details/lab-details.php?lab_user_name='.$lab_user_name.'" class="btn btn-primary mb-1 w-100">عرض التفاصيل</a>
                   </div>
                 </div>
               </div>

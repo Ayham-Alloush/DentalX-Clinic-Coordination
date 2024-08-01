@@ -18,6 +18,10 @@ main {
   background-image: linear-gradient(90deg, #67AFFD 0%, #4A4DEA 48.75%, #7A40F4 101.73%); 
 }
 
+.alert{
+  transition: opacity 1s ease-in ;
+}
+
 @media (min-width: 576px) {
     main {
         padding-right: 200px;

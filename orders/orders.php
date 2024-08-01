@@ -23,12 +23,12 @@
     mysqli_stmt_close($stmt) ;
 
     // getting info for each order from orders table
-    $query = "SELECT id , lab_name, lab_type, order_date, receive_date, patient_name, price, status  FROM orders where doc_id = ?" ;
+    $query = "SELECT id, lab_username, lab_name, lab_type, order_date, receive_date, patient_name, price, status, order_details_id FROM orders where doc_id = ?" ;
     $stmt = mysqli_prepare($con, $query);
     mysqli_stmt_bind_param($stmt, "s", $id ) ;
     mysqli_stmt_execute($stmt) ;
     mysqli_stmt_store_result($stmt);
-    mysqli_stmt_bind_result($stmt, $order_id, $lab_name, $lab_type, $order_date, $receive_date, $patient_name, $price, $status) ;
+    mysqli_stmt_bind_result($stmt, $order_id, $lab_user_name, $lab_name, $lab_type, $order_date, $receive_date, $patient_name, $price, $status, $order_details_id) ;
     // we will fetch ($stmt) inside html section . 
 
 ?>
@@ -150,11 +150,25 @@
                 <!-- card component -->
                 <?php
                     while(mysqli_stmt_fetch($stmt)) {
-                        echo '<div class="col">
+                        $query = "SELECT order_details FROM order_details WHERE id=?" ;
+                        $stmt2 = mysqli_prepare($con , $query) ;
+                        mysqli_stmt_bind_param($stmt2, "i",$order_details_id);
+                        mysqli_stmt_execute($stmt2);
+                        mysqli_stmt_bind_result($stmt2, $order_details);
+                        mysqli_stmt_fetch($stmt2);
+                        mysqli_stmt_close($stmt2) ;
+                        $details = json_decode($order_details, true);
+
+                        echo '
+                            <div class="col">
                                 <div class="card mb-3">
                                     <div class="card-body">
                                         <p class="card-text ">اسم المخبر :
-                                            <span class="text-secondary">'. $lab_name.'</span>
+                                            <span class="text-secondary">
+                                                <a href="../lab_details/lab-details.php?lab_user_name='.$lab_user_name.'" class="text-decoration-none">
+                                                    '.$lab_name.'
+                                                </a>
+                                            </span>
                                         </p>
                                         <p class="card-text ">نوع المخبر :
                                             <span class="text-secondary">'. $lab_type.'</span>
@@ -169,29 +183,144 @@
                                             <span class="text-secondary">'. $patient_name.'</span>
                                         </p>
                                         <p class="card-text ">السعر :
-                                            <span class="text-secondary">'. $price.'</span>
+                                            <span class="text-secondary">'. intval($price).'</span>
+                                            <span class="text-secondary">ل.س</span>
                                         </p>
                                         <p class="card-text ">حالة الطلب :
-                                            <span class="text-secondary">'. $status.'</span>
+                                            <span class="status badge p-2 fw-semibold">'. $status.'</span>
                                         </p>
-                                        <button class="btn btn-sm custom border-0 text-light w-100 fw-bold">عرض التفاصيل</button>
+                                        <button type="button" class="btn btn-sm custom border-0 text-light w-100 fw-bold"
+                                            data-bs-toggle="modal" data-bs-target="#detailsModalFor'.$order_id.'" >عرض التفاصيل</button>
                                     </div>
                                     <div class="card-footer text-center mt-0">
-                                        <button class="btn btn-sm btn-danger w-100 fw-bold">الغاء الطلب</button>
+                                        <form method="post" action="../database/delete-order.php" id="deleteForm'.$order_id.'">
+                                            <input type="text" value='.$order_id.' name="order-id" hidden>
+                                            <button type="button" onclick="checkStatus(\''.$status.'\',\'deleteModal'.$order_id.'\')"  class="btn btn-sm btn-danger w-100 fw-bold">الغاء الطلب</button>
+                                            <div class="modal" id="deleteModal'.$order_id.'" tabindex="-1">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">                                                
+                                                    <div class="modal-body text-end pb-0">
+                                                        <p>هل متأكد من إلغاء الطلب ؟</p>
+                                                    </div>
+                                                    <div class="modal-footer justify-content-center gap-3 p-1">
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">الغاء</button>
+                                                        <button type="submit" class="btn btn-danger">نعم</button>
+                                                    </div>
+                                                    </div>
+                                                </div>
+                                            </div> 
+                                        </form>
                                     </div>
                                 </div>
-                            </div>' ;
-                    }
-                ?>
-                <!--end card component -->             
+                            </div>
+                            
+                            <div class="modal fade" id="detailsModalFor'.$order_id.'" tabindex="-1">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-body">       
+                                            <div class="table-responsive">
+                                                <table class="table table-light mt-3 table-bordered align-middle">
+                                                    <thead>
+                                                        <tr>
+                                                            <th scope="col" class="fw-semibold">اسم المادة</th>
+                                                            <th scope="col" class="fw-semibold">السعر</th>
+                                                            <th scope="col" class="fw-semibold">العدد</th>
+                                                            <th scope="col" class="fw-semibold">السعر الإجمالي</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody> ' ;
+                                                        $i = 0 ;
+                                                        $totalPrice = 0 ;
+                                                        // $details was JSON object and we deocoded it , now it has 
+                                                        // key : value , and we have inside it key=counts , value= array of counts
+                                                        // and it has key=prices , value = array of prices  
+                                                        // and key=items , value = array of items names .
+                                                        while($i < count($details['counts']) ){
+                                                            $countsArray = $details['counts'];
+                                                            $itemsArray = $details['items'];
+                                                            $pricesArray = $details['prices'];
+                                                            $itemCount = $countsArray[$i] ;
+                                                            $itemPrice = $pricesArray[$i] ;
+                                                            $itemName = $itemsArray[$i] ;
+                                                            $Price = $itemPrice * $itemCount ;
+                                                            $totalPrice += $Price ; 
+                                                            echo '
+                                                            <tr>
+                                                                <td>'.$itemName.'</td>
+                                                                <td>'.$itemPrice.'</td>
+                                                                <td>'.$itemCount.'</td>
+                                                                <td>'.$Price.'</td>
+                                                            </tr>
+                                                            ' ;
+                                                            $i++ ;
+                                                        } 
+                                                        echo '
+                                                            <tr>
+                                                                <th scope="row"  class="fw-bold">السعر النهائي</th>
+                                                                <td colspan=3 class="fw-bold fs-5 text-danger">  '.$totalPrice.'  ل.س</td>
+                                                            </tr>
+
+                                                            <tr>
+                                                             <td colspan=4 class="pt-3 border-0 opacity-0"></td>
+                                                            <tr>
+                                                            
+                                                            <tr>
+                                                                <th>درجة اللون</th>
+                                                                <td colspan=3 >'.$details['item_color'].'</td>
+                                                            </tr>
+
+                                                            <tr>
+                                                             <td colspan=4 class="pt-3 border-0 opacity-0"></td>
+                                                            <tr>
+                                                            
+                                                            <tr>
+                                                                <th>عمر المريض</th>
+                                                                <td colspan=3 >'.$details['patient_age'].'</td>
+                                                            </tr>
+                                                            
+                                                            <tr>
+                                                                <th>مهنة المريض</th>
+                                                                <td colspan=3 >'.$details['patient_work'].'</td>
+                                                            </tr>
+
+                                                            <tr>
+                                                             <td colspan=4 class="pt-3 border-0 opacity-0"></td>
+                                                            <tr>
+
+                                                            <tr> 
+                                                                <th colspan=4 class="text-center fw-bold" >ملاحظات</th>
+                                                            </tr>
+
+                                                            <tr>
+                                                                <td colspan=4 class="">'.$details['notice'].'</td>
+                                                            </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">اغلاق</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> ' ;
+                    } ;                                 
+                ?>          
+            </div>
+            <!-- end of the row which has while loop , generating div.col and details modal for each order  -->
+            
+            <!-- this will be visible when doctor try to cancel order has already been accepted -->
+            <div class="alert alert-danger position-fixed  bottom-0 start-50 translate-middle-x d-none" id="alert">
+                لا يمكن الغاء الطلب في حال تم الموافقة عليه !
             </div>
         </div>
-        
+        <!-- end of container -->
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
         crossorigin="anonymous"></script>
+    <script src="js/main.js"></script>
 </body>
 
 </html>

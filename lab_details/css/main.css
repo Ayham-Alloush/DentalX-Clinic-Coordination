@@ -1,0 +1,55 @@
+main{
+  background-image: linear-gradient(to right , #c1c5c7 , #9B91FA , #5C13FB 96.15%) ;
+  min-height: 100vh ;
+}
+
+.navbar.navbar-fixed-right {
+  position: fixed;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 200px;
+  overflow-y: auto;
+  background-color: #e1ddea;
+  border-right: 1px solid #ddd; 
+}
+
+/* changing the position of accordions arrow , because this website is arabic instead of english */
+.accordion-button::after{
+  position: absolute ;
+  left: 15px ;
+}
+
+/* add order , and next buttons */
+.buy,
+.next{
+  background-color: #7b41f8 ;
+}
+
+/* override bootstrap */
+.buy:hover,
+.next:hover{
+  background-color: #5C13FB !important ;
+}
+
+.next,
+.cancel{
+  opacity: 0 ;
+  transition: opacity 0.6s linear ;
+}
+
+.alert{
+  transition: opacity 1s ease-out ;
+}
+
+@media (min-width: 768px){
+  main{
+    padding-right: 200px ;
+  }
+}
+
+@media (max-width: 767.9px){
+  main{
+     padding-top: 60px ;
+  }
+}
