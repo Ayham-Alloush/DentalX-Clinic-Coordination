@@ -18,8 +18,14 @@ main {
   background-image: linear-gradient(90deg, #67AFFD 0%, #4A4DEA 48.75%, #7A40F4 101.73%); 
 }
 
-.alert{
-  transition: opacity 1s ease-in ;
+.warning{
+    animation: warning 2s linear infinite alternate;
+}
+
+@keyframes warning {
+    100%{
+        background-color: rgb(253, 157, 157) ;
+    }
 }
 
 @media (min-width: 576px) {

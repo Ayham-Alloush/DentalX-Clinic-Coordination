@@ -158,7 +158,7 @@
 
                             echo '
                                 <div class="col">
-                                    <div class="card mb-3">
+                                    <div class="card mb-3 " data-date="'.$receive_date.'">
                                         <div class="card-body">
                                             <p class="card-text ">اسم العيادة :
                                                 <span class="text-secondary">
@@ -171,7 +171,7 @@
                                             <p class="card-text ">تاريخ الطلب :
                                                 <span class="text-secondary">'. $order_date.'</span>
                                             </p>
-                                            <p class="card-text ">تاريخ الاستلام :
+                                            <p class="card-text date rounded">تاريخ الاستلام :
                                                 <span class="text-secondary">'. $receive_date.'</span>
                                             </p>
                                             <p class="card-text ">اسم المريض :

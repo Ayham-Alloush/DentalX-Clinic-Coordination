@@ -33,3 +33,20 @@ cards_footers.forEach(card_footer => {
     waiting_deliver_button.classList.remove('d-none') ;
   }
 });
+
+function calculateDiffBetweenDates(date1Str) {
+  const date1 = new Date(date1Str);
+  const now = new Date();
+  const differenceInMilliseconds = date1 - now;
+  const differenceInDays = Math.ceil(differenceInMilliseconds / (1000 * 60 * 60 * 24));
+  return differenceInDays;
+}
+
+const cards = document.querySelectorAll('.card');
+cards.forEach(card => {
+  const receive_date = card.dataset.date;
+  if(calculateDiffBetweenDates(receive_date) <= 2){
+    card.querySelector('.date').classList.add("warning");
+  }
+});
+
