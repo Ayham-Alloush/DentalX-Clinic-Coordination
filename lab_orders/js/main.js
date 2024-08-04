@@ -23,14 +23,14 @@ cards_footers.forEach(card_footer => {
   const status = card_footer.dataset.status;
   const confirm_form = card_footer.querySelector('#confirm-form');
   const ready_form = card_footer.querySelector('#ready-form');
-  const waiting_deliver_button = card_footer.querySelector('#waiting-deliver');
+  const delivered_form = card_footer.querySelector('#delivered-form');
 
   if (status === 'بانتظار الموافقة') {
     confirm_form.classList.remove('d-none');
   } else if (status === 'قيد التحضير') {
     ready_form.classList.remove('d-none');
   } else {
-    waiting_deliver_button.classList.remove('d-none') ;
+    delivered_form.classList.remove('d-none') ;
   }
 });
 

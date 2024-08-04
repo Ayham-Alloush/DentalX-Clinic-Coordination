@@ -138,7 +138,7 @@
                 <?php
                     while(mysqli_stmt_fetch($stmt)) {
                         // lab user will not see orders with status="rejected"
-                        if($status != "تم الرفض"){
+                        if($status != "تم الرفض" && $status != "تم التسليم"){
                             $query = "SELECT order_details FROM order_details WHERE id=?" ;
                             $stmt2 = mysqli_prepare($con , $query) ;
                             mysqli_stmt_bind_param($stmt2, "i",$order_details_id);
@@ -232,9 +232,26 @@
                                                 </div> 
                                             </form> 
 
-                                            <button class="btn btn-sm btn-secondary w-100 border-0 text-light fw-bold d-none" type="button" id="waiting-deliver" disabled>
-                                                قيد التسليم 
-                                            </button>
+                                            <form method="post" action="../database/change-status.php" class="d-none" id="delivered-form">
+                                                <input type="text" value='.$order_id.' name="order-id" hidden>
+                                                <input type="text" value="تم التسليم" name="new-status" hidden>
+                                                <button type="button" class="btn btn-sm btn-secondary w-100 border-0 text-light fw-bold" data-bs-toggle="modal" data-bs-target="#deliveredModal'.$order_id.'">
+                                                    انهاء التسليم
+                                                </button>
+                                                <div class="modal" id="deliveredModal'.$order_id.'" tabindex="-1">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">                                                
+                                                            <div class="modal-body text-end pb-0">
+                                                                <p>هل انت متأكد أن الطلب تم تسليمه ؟</p>
+                                                            </div>
+                                                            <div class="modal-footer justify-content-center gap-3 p-1">
+                                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">الغاء</button>
+                                                                <button type="submit" class="btn btn-success">نعم</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div> 
+                                            </form> 
 
                                             <form method="post" action="../database/change-status.php">
                                                 <input type="text" value='.$order_id.' name="order-id" hidden>

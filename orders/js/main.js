@@ -15,6 +15,9 @@ elements.forEach(element => {
   } else if (textContent === 'تم الرفض') {
     element.classList.add('bg-danger');
     element.classList.add('text-light');
+  } else if (textContent === 'تم التسليم'){
+    element.classList.add('bg-secondary');
+    element.classList.add('text-light');
   }
   
 });
