@@ -22,6 +22,11 @@ main {
   transition: opacity 1s ease-in ;
 }
 
+.custom-tooltip {
+    --bs-tooltip-bg: rgb(78, 77, 77);
+    --bs-tooltip-color: rgb(255, 255, 255);
+}
+
 @media (min-width: 576px) {
     main {
         padding-right: 200px;

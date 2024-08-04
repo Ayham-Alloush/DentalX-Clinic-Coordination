@@ -158,6 +158,20 @@
                         mysqli_stmt_fetch($stmt2);
                         mysqli_stmt_close($stmt2) ;
                         $details = json_decode($order_details, true);
+                        if($status=="تم الرفض"){
+                            $query = "SELECT reason FROM reasons WHERE order_id = ?" ;
+                            $stmt2 = mysqli_prepare($con , $query) ;
+                            mysqli_stmt_bind_param($stmt2, "i",$order_id);
+                            mysqli_stmt_execute($stmt2);
+                            mysqli_stmt_bind_result($stmt2, $reason);
+                            mysqli_stmt_fetch($stmt2);
+                            mysqli_stmt_close($stmt2) ;
+                        }
+                        else{
+                            // cause if we didn't initialize this variable we will have error because we are using it in the tooltip
+                            // even if status isn't rejected , but we d-none the tooltip and the info icon .
+                            $reason = "nothing" ;
+                        }
 
                         echo '
                             <div class="col">
@@ -188,6 +202,10 @@
                                         </p>
                                         <p class="card-text ">حالة الطلب :
                                             <span class="status badge p-2 fw-semibold">'. $status.'</span>
+                                            <i class="fa-solid fa-circle-info text-danger reject-reason d-none" data-bs-custom-class="custom-tooltip"
+                                                data-status="'.$status.'" data-bs-toggle="tooltip" data-bs-placement="top" 
+                                                data-bs-title="'.$reason.'">
+                                            </i>
                                         </p>
                                         <button type="button" class="btn btn-sm custom border-0 text-light w-100 fw-bold"
                                             data-bs-toggle="modal" data-bs-target="#detailsModalFor'.$order_id.'" >عرض التفاصيل</button>

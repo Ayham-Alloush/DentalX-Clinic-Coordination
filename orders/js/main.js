@@ -45,3 +45,17 @@ function checkStatus(status,modal_id){
         },2000) ;
   }
 }
+
+// enabling tooltips
+const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+
+// displaying info icon when status is "تم الرفض" .
+const infoIcons = document.querySelectorAll('.reject-reason');
+
+infoIcons.forEach(icon => {
+  const status = icon.dataset.status ;
+  if (status === 'تم الرفض') {
+    icon.classList.remove("d-none") ;
+  }
+});
