@@ -263,11 +263,12 @@
                                                     <div class="modal-dialog">
                                                         <div class="modal-content">                                                
                                                             <div class="modal-body text-end pb-0">
-                                                                <p>هل انت متأكد من رفض الطلب ؟</p>
+                                                                <p>الرجاء توضيح سبب الرفض</p>
+                                                                  <textarea class="form-control" name="reason" required placeholder="سبب الرفض" rows="3"></textarea> 
                                                             </div>
-                                                            <div class="modal-footer justify-content-center gap-3 p-1">
+                                                            <div class="modal-footer justify-content-center mt-2 gap-3 p-1">
                                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">الغاء</button>
-                                                                <button type="submit" class="btn btn-danger">نعم</button>
+                                                                <button type="submit" class="btn btn-danger">متابعة</button>
                                                             </div>
                                                         </div>
                                                     </div>

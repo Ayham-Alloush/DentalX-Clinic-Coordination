@@ -18,6 +18,12 @@
   mysqli_stmt_close($stmt);
 
 
+  $query = "DELETE FROM reasons WHERE order_id = ?";
+  $stmt = mysqli_prepare($con, $query);
+  mysqli_stmt_bind_param($stmt, "i", $order_id);
+  mysqli_stmt_execute($stmt);
+  mysqli_stmt_close($stmt);
+
   $query = "DELETE FROM orders WHERE id = ?";
   $stmt = mysqli_prepare($con, $query);
   mysqli_stmt_bind_param($stmt, "i", $order_id);
