@@ -191,6 +191,21 @@
     echo "Error creating images table :" . mysqli_error($conn) ;
   }
 
+  // create table for rejecting an order reason
+  $createreasonsTableQuery= "
+    CREATE TABLE IF NOT EXISTS reasons (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    order_id INT,
+    reason LONGTEXT ,
+    FOREIGN KEY (order_id) REFERENCES orders(id)
+    ); " ;
+
+  if(mysqli_query( $conn , $createreasonsTableQuery )){
+    echo "reasons table created successfully <br>" ;
+  }
+  else{
+    echo "Error creating reasons table :" . mysqli_error($conn) ;
+  }
 
   mysqli_close($conn) ;
 ?>
