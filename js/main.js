@@ -21,11 +21,15 @@ const urlParams = new URLSearchParams(window.location.search);
 // Check if the "x" parameter exists and its value is "1"
 if (urlParams.has('x') && urlParams.get('x') === '1') {
   // Display an alert indicating wrong password
-  alert('Wrong password');
+  alert('كلمة المرور غير صحيحة');
 }
 
 // Check if the "x" parameter exists and its value is "2"
 if (urlParams.has('x') && urlParams.get('x') === '2') {
   // Display an alert indicating invalid user name
-  alert('Invalid user name');
+  alert('اسم المستخدم غير صالح');
 }
+
+// Remove the 'x' parameter from the URL
+const newUrl = window.location.href.split('?')[0]; // Remove query string
+window.history.replaceState({}, document.title, newUrl);

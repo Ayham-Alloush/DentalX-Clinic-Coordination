@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 
 <head>
   <meta charset="UTF-8">
@@ -22,55 +22,55 @@
           <h1 class="h1 d-md-none">
             DentalX
           </h1>
-          <h3 class="h3 fw-semibold fs-3">
-            Hey , welcome back ..
+          <h3 class="h3 fw-semibold fs-3" style="color:  #0b2975ba;">
+            سجل دخولك الآن واستمتع بخدماتنا.
           </h3>
-          <p class="text-secondary ">
-            Enter your information to login. <br>
-            Make sure that it will remain confidential .
+          <p class="text-dark fs-5">
+            سجل دخولك بأمان وسهولة. <br>
+            نضمن لك خصوصية بياناتك.
           </p>
           <form action="database/signin.php" method="post" onsubmit="return validateForm()" class="needs-validation"
             novalidate>
             <div class="mb-2 mb-md-3 ">
-              <label for="user_name" class="form-label">Username</label>
+              <label for="user_name" class="form-label">اسم المستخدم</label>
               <input type="text" name="user_name" id="user_name" class="form-control" required>
               <div class="invalid-feedback">
-                We're sorry, but the username you entered is invalid .
+                يُرجى إدخال اسم المستخدم.
               </div>
             </div>
             <div class="mb-2 mb-md-3">
-              <label for="pass" class="form-label">Password</label>
+              <label for="pass" class="form-label">كلمة المرور</label>
               <input type="password" name="pass" id="pass" class="form-control" required>
               <div class="invalid-feedback">
-                We're sorry, but the password you entered is incorrect.
+                يُرجى إدخال كلمة المرور.
               </div>
             </div>
             <!--  -->
-            <p class="text-secondary mb-1">Are you ?</p>
-            <div class="form-check">
+            <p class="text-dark mb-1">هل انت ؟</p>
+            <div>
               <input type="radio" class="form-check-input" name="title" value="doctor" id="doc" required>
-              <label for="doc" class="form-check-label">Doctor</label>
+              <label for="doc" class="form-check-label me-1">دكتور</label>
             </div>
-            <div class="form-check">
+            <div>
               <input type="radio" class="form-check-input" name="title" value="Prosthodontist" id="pros" required>
-              <label for="pros" class="form-check-label">Prosthodontist</label>
+              <label for="pros" class="form-check-label me-1">مخبري</label>
               <div class="invalid-feedback" id="options">
-                Please choose at least one option .
+                يجب عليك اختيار خيار واحد على الأقل.
               </div>
             </div>
             <hr>
             <!--  -->
-            <button type="submit" class="btn custom w-100 text-white border-0">Sign In</button>
+            <button type="submit" class="btn custom w-100 text-white border-0">تسجيل الدخول</button>
             <div class="text-center d-flex align-items-center gap-1">
               <div class="before bg-secondary w-100"></div>
-              <span class="text-secondary">or</span>
+              <span class="text-secondary">أو</span>
               <div class="after bg-secondary w-100"></div>
             </div>
             <a href="signup/doc-signup.html">
-              <button type="button" class="btn custom w-100 text-white border-0 mb-2">Sign Up As A Doctor</button>
+              <button type="button" class="btn custom w-100 text-white border-0 mb-2">انشاء حساب دكتور</button>
             </a>
             <a href="lab_signup/lab-signup.html">
-              <button type="button" class="btn custom w-100 text-white border-0">Sign Up As A Prosthodontist</button>
+              <button type="button" class="btn custom w-100 text-white border-0">انشاء حساب مخبري</button>
             </a>
           </form>
           <div>
