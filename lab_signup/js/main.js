@@ -14,3 +14,13 @@
       form.classList.add('was-validated')
     }, false)
   })
+
+  const urlParams = new URLSearchParams(window.location.search);
+  const user = urlParams.get('user');
+  if(user=="exist"){
+    alert("اسم المستخدم الذي أدخلته مستخدم من قبل. يرجى اختيار اسم آخر.");
+  }
+
+  // Remove the 'user' parameter from the URL
+  const newUrl = window.location.href.split('?')[0]; // Remove query string
+  window.history.replaceState({}, document.title, newUrl);
