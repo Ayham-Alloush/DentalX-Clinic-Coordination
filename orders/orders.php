@@ -210,15 +210,33 @@
                                         <button type="button" class="btn btn-sm custom border-0 text-light w-100 fw-bold"
                                             data-bs-toggle="modal" data-bs-target="#detailsModalFor'.$order_id.'" >عرض التفاصيل</button>
                                     </div>
-                                    <div class="card-footer text-center mt-0">
-                                        <form method="post" action="../database/delete-order.php" id="deleteForm'.$order_id.'">
+                                    <div class="card-footer text-center mt-0 order-footer" data-status="'.$status.'">
+                                        <form method="post" action="../database/delete-order.php" id="cancelForm" class="d-none">
                                             <input type="text" value='.$order_id.' name="order-id" hidden>
-                                            <button type="button" onclick="checkStatus(\''.$status.'\',\'deleteModal'.$order_id.'\')"  class="btn btn-sm btn-danger w-100 fw-bold">الغاء الطلب</button>
-                                            <div class="modal" id="deleteModal'.$order_id.'" tabindex="-1">
+                                            <button type="button" onclick="checkStatus(\''.$status.'\',\'cancelModal'.$order_id.'\')"  class="btn btn-sm btn-danger w-100 fw-bold">الغاء الطلب</button>
+                                            <div class="modal" id="cancelModal'.$order_id.'" tabindex="-1">
                                                 <div class="modal-dialog">
                                                     <div class="modal-content">                                                
                                                     <div class="modal-body text-end pb-0">
                                                         <p>هل متأكد من إلغاء الطلب ؟</p>
+                                                    </div>
+                                                    <div class="modal-footer justify-content-center gap-3 p-1">
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">الغاء</button>
+                                                        <button type="submit" class="btn btn-danger">نعم</button>
+                                                    </div>
+                                                    </div>
+                                                </div>
+                                            </div> 
+                                        </form>
+
+                                        <form method="post" action="../database/delete-order.php" id="removeForm" class="d-none">
+                                            <input type="text" value='.$order_id.' name="order-id" hidden>
+                                            <button type="button" onclick="checkStatus(\''.$status.'\',\'removeModal'.$order_id.'\')"  class="btn btn-sm btn-secondary w-100 fw-bold">حذف الطلب</button>
+                                            <div class="modal" id="removeModal'.$order_id.'" tabindex="-1">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">                                                
+                                                    <div class="modal-body text-end pb-0">
+                                                        <p>هل متأكد من حذف الطلب من قائمة الطلبات ؟</p>
                                                     </div>
                                                     <div class="modal-footer justify-content-center gap-3 p-1">
                                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">الغاء</button>

@@ -26,7 +26,7 @@ const errorDiv = document.getElementById("alert") ;
 
 let isProcessing = false;
 function checkStatus(status,modal_id){
-  if(status=="بانتظار الموافقة" || status=="تم الرفض"){
+  if(status=="بانتظار الموافقة" || status=="تم الرفض" || status=="تم التسليم"){
     const myModal = new bootstrap.Modal(document.getElementById(modal_id));
     myModal.show();
   }
@@ -58,4 +58,20 @@ infoIcons.forEach(icon => {
   if (status === 'تم الرفض') {
     icon.classList.remove("d-none") ;
   }
+});
+
+// selecting all cards footers , each card footer has data-status=status 
+const cards_footers = document.querySelectorAll('.order-footer');
+
+// we will make just one button visible depending on status .
+cards_footers.forEach(card_footer => {
+  const status = card_footer.dataset.status;
+  const cancel_form = card_footer.querySelector('#cancelForm');
+  const remove_form = card_footer.querySelector('#removeForm');
+
+  if (status === 'تم التسليم' || status === 'تم الرفض') {
+    remove_form.classList.remove('d-none');
+  } else{
+    cancel_form.classList.remove('d-none');
+  }  
 });
