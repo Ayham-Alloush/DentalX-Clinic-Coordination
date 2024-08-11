@@ -146,7 +146,7 @@
             </div>
         </nav>
         <div class="container-fluid pt-3 pe-5 ps-5 ">
-            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3">
+            <div class="row row-cols-1 row-cols-lg-2">
                 <!-- card component -->
                 <?php
                     while(mysqli_stmt_fetch($stmt)) {
