@@ -134,13 +134,18 @@
     </nav>
 
     <div class="container-fluid pt-3 pe-5 ps-5 ">
+      <div class="row">
+        <div class="col">
+          <input type="text" class="form-control mb-3" id="search-input" placeholder="بحث">
+        </div>
+      </div>
       <div class="row row-cols-1 row-cols-lg-2">
         <!-- card component -->
         <!-- php code , for each row in lab_users table .. we will add a card to home screen -->
         <?php 
           while (mysqli_stmt_fetch($stmt)) {
             echo '
-              <div class="col">
+              <div class="col one-card">
                 <div class="card mb-3">
                   <div class="card-body">
                     <p class="card-text fs-5">اسم المخبر :
@@ -169,6 +174,7 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
     crossorigin="anonymous"></script>
+  <script src="js/main.js"></script>
 </body>
 
 </html>
