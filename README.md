@@ -35,7 +35,7 @@ Potential future developments to enhance DentalX include:
 
 This project is a completed graduation requirement.
 
-## Authors
+## Author
 * Alayham Luqman Alloush
 
 **Supervised by:**
