@@ -37,6 +37,7 @@ This project is a completed graduation requirement.
 
 ## Author
 * Alayham Luqman Alloush
+* Ibrahim Khader Diab
 
 **Supervised by:**
 * Dr. Raed Jabri
