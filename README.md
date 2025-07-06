@@ -4,6 +4,10 @@
 
 **DentalX** is a comprehensive web-based application developed as a graduation project at Tishreen University, Faculty of Informatics Engineering, Software and Information Systems Department (Academic Year 2023-2024). It is designed to streamline communication and information exchange between dentists and dental prosthetics laboratories. The system aims to enhance the quality of patient care by providing a secure and efficient environment for managing patient records, appointments, treatments, and billing, while also facilitating material orders and improving operational efficiency for clinics and labs.
 
+**--- A Note on Project Structure ---**
+
+Please note: As a graduation project primarily focused on demonstrating core functionality and database integration within a tight timeframe, the repository's initial file organization reflects the development process. For future projects, I am committed to implementing more modular and standardized folder structures to enhance maintainability and scalability.
+
 ## Key Features
 
 DentalX offers a range of functionalities to support both dentists and laboratory technicians:
